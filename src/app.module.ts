@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { RestaurantsModule } from './restaurants/restaurants.module';
-import { join } from 'path';
 
 @Module({
   imports: [
@@ -12,6 +12,16 @@ import { join } from 'path';
       sortSchema: true,
     }),
     RestaurantsModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'castledeer',
+      password: 'postgres',
+      database: 'nuber-eats',
+      synchronize: true,
+      logging: true,
+    }),
   ],
   controllers: [],
   providers: [],
